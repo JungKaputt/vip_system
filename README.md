@@ -1,22 +1,54 @@
 # MTA:SA VIP System
 
-A lightweight and extendable VIP system for Multi Theft Auto: San Andreas (MTA:SA) servers. This resource uses SQLite (`registry.db`) to store and manage VIP player data based on their serial. It provides a clean foundation that can be expanded with more advanced VIP features.
+A lightweight and expandable VIP system for Multi Theft Auto: San Andreas (MTA:SA) servers. This resource uses SQLite (`registry.db`) to store VIP player data based on their serial. It is built as a solid foundation that can be easily extended with additional perks, GUI panels, or shop integration.
 
 ---
 
 ## 🎯 Features
 
-- Local SQLite storage (no MySQL required)
-- Assigns VIP status to players for a number of days
-- Automatically checks VIP validity on player login
-- Admin command to grant VIP status
-- Easily extendable structure for adding more VIP perks
+- Uses local SQLite database (no external setup required)
+- Stores VIP data by player serial
+- Assigns VIP for a specific number of days
+- Automatically checks VIP status on player login
+- Admin command to grant VIP
+- Simple and clean codebase for easy modifications
 
 ---
 
-## 🛠️ Database Schema
+## 📁 Resource Structure
 
-The system creates a single table in `registry.db`:
+---
+
+## 🚀 Installation Guide
+
+1. Download or clone this repository.
+2. Place the `vip_system` folder into your MTA:SA server's `resources/` directory.
+3. Add the resource to your `mtaserver.conf` **or** start it manually:
+
+4. Use `/addvip` command in-game to grant VIP status to players.
+
+---
+
+## 📜 Usage
+
+### 🔹 Grant VIP to Player
+Use the following command as an admin:
+📌 Example: /addvip JohnDoe 30
+
+This will grant **30 days** of VIP access to the player named `JohnDoe`.
+
+---
+
+## 🧠 How It Works
+
+- When the resource starts, it creates a table called `vip_players` in `registry.db` if it doesn't exist.
+- Each player’s **serial** is used as a unique identifier.
+- VIP expiration is stored as a **UNIX timestamp**.
+- On player login, the server checks if the player is still VIP and notifies them accordingly.
+
+---
+
+## 🛠️ SQLite Database Schema
 
 ```sql
 CREATE TABLE vip_players (
@@ -24,43 +56,3 @@ CREATE TABLE vip_players (
     vip_until INTEGER
 );
 ```
-
-serial: Unique identifier for each player
-
-vip_until: UNIX timestamp of VIP expiration
-
-📦 Commands
-Command	Description
-/addvip [playerName] [days]	Assigns VIP status for [days] days to a player by name
-Example: /addvip John_Doe 30 — Grants John_Doe 30 days of VIP access.
-
-🚀 Installation
-Download or clone this repository.
-
-Place the folder into your resources directory.
-
-Start the resource:
-
-via mtaserver.conf, or
-
-in-game using start vip_system
-
-Use /addvip in-game to assign VIP status.
-
-🧩 Suggested Future Features
-VIP perks (vehicles, skins, money, access to special areas)
-
-Daily VIP rewards
-
-GUI panel to show VIP time remaining
-
-Automatic expiration warnings
-
-Donation-based auto-assignment
-
-📜 License
-This resource is open-source and free to use. Attribution is appreciated but not required.
-
-🤝 Contributing
-Pull requests and suggestions are welcome. Feel free to fork this repository and improve it with additional features or bug fixes.
-
