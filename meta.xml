@@ -1,0 +1,4 @@
+<resource>
+    <info author="JungKaputt" name="VIP System" version="1.0" type="script"/>
+    <script src="server.lua" type="server"/>
+</resource>
